@@ -24,12 +24,14 @@ export default function Blogs() {
 
     }
     })
+    //gets all blogs and passes as a prop to blogcard 
     return (
     <>
     <div className='flex flex-wrap sm:px-8 lg:px-12 justify-between'>
         {blogsInView.map((item,key)=>(
-            <BlogCard {...item} key={key}/>
+            <BlogCard showLikes={true} {...item} key={key}/>
         ))}
+        {/* rendred if blogs is still loading */}
         {isLoading && skeletons.map((_,key)=>(<BlogCardSkeleton key={key}/>))}
     </div>
     <div className="mt-3">

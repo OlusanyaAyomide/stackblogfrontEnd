@@ -5,19 +5,19 @@ import { IBlog } from "@/interfaces/interface";
 import { pageSize } from "@/utils/constants";
 
 
-
+//slice paginated blog from all blog passed to the function
 export const blogSlicedArray = (array:IBlog[],start:number,end:number)=>{
     const newarray = [...array]
     return newarray.slice(start,end)
   }
-
+//gets the range of buttons to display
 const range = (start:number, end:number) => {
     let length = end - start + 1;
     return Array.from({ length }, (_, idx) => idx + start);
 };
 
 
-
+//keep tracks of the pagination buttons
 export const usePagination = () => {
     const [paginationRange,setPaginationRange] = useState<(string|number)[] | null>(null)
     const {page,blogs} = useAppSelector((state=>state.bloglist))

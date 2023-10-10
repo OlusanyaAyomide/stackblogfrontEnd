@@ -15,6 +15,8 @@ import { textToHtml } from '@/lib/utils';
 import RadioLoader from '../utils/Loader';
 import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
+import { useAppSelector } from '@/hooks/reduxHooks';
+import useLogIn from '@/hooks/useLogIn';
 
 const fileTypes = ["JPG", "PNG"]
 
@@ -28,7 +30,7 @@ interface IWriteMain{
 }
 //used to write or edit a blog
 export default function WriteMain(data:IWriteMain) {
-    //data is prefilled with default blog data if user is edditing
+    //data is prefilled with default blog data if user is editing
     const [text,setText] = useState<string>(data.text || "")
     const [blogFile,setBlogFile] = useState<File | null>(null)
     const [fileBlob,setFileBlob] = useState<string>(data.fileBlob || "")
@@ -37,6 +39,8 @@ export default function WriteMain(data:IWriteMain) {
     const toaster = useCustomToast()
     const router = useRouter()
     const queryClient = useQueryClient()
+    const {isAuthenticated} = useAppSelector((state=>state.user))
+    const {signIn} = useLogIn()
 
     
     const {isLoading:loading,mutate} = usePostRequest({
@@ -78,6 +82,10 @@ export default function WriteMain(data:IWriteMain) {
 
     const handleSubmit = ()=>{
         //mimimal blog validations
+        if(!isAuthenticated){
+            //if user is not authenticated, authentictate first
+            return signIn()
+        }
         const wordLength =text.split(' ').length
         const titleLength = title.split(' ').length
         if(wordLength < 120){

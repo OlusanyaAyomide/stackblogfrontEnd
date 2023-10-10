@@ -5,6 +5,7 @@ import { IComment } from '@/interfaces/interface'
 import { usePostRequest } from '@/hooks/useRequestProcessor'
 import { useAppSelector } from '@/hooks/reduxHooks'
 import { blogCommentRequest as mutationFn } from '@/hooks/requests/endpoints'
+import useLogIn from '@/hooks/useLogIn'
 
 //displays all comments under a post
 export default function BlogComment({comment,slug}:{comment:IComment[],slug:string}) {
@@ -13,9 +14,16 @@ export default function BlogComment({comment,slug}:{comment:IComment[],slug:stri
     const {profile} = useAppSelector((state=>state.user))
     const {mutate} = usePostRequest({mutationFn,sucessText:'comment has been added'})
     const currentTime = new Date()
+    const {isAuthenticated} = useAppSelector((state=>state.user))
+    const {signIn} =useLogIn()
 
     //blogs are first added to state before being sent to server(optismistic update)
     const handleSubmit = (text:string)=>{
+        //if user wants to comment without being authenticate logIn first
+        if(!isAuthenticated){
+            signIn()
+            return
+        }
         setComments((prev=>{return[{
             comment:text,
             createdAt:currentTime.toISOString(),

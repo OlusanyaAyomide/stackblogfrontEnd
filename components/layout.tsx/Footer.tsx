@@ -9,7 +9,8 @@ export default function Footer() {
             <Logo/>
         </div>
         <Separator orientation='horizontal' className='mb-2 opacity-50'/>
-        <h1 className="text-center text-xs">All rights reserved</h1>
+        <h1 className="text-center text-xs">All articles are gotten from medium</h1>
+        <h1 className="text-center text-[10px]">All rights reserved</h1>
     </div>
   )
 }

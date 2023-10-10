@@ -12,6 +12,7 @@ import { Input } from '../ui/input'
 
 export default function Header() {
     const {isAuthenticated} = useAppSelector((state=>state.user))
+    //keeps track if search barhas been clicked 
     const [isInputOpended,setIsInputOpened] = useState(false)
     
   return (
@@ -46,9 +47,6 @@ export default function Header() {
             </Link>
 
             }
-            <Link href={"/write"}>
-        
-            </Link>
    
             <div className="w-[32px] sm:w-[40px] mr-1">
             <SwitchTheme/>

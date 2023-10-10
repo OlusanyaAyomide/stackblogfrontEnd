@@ -15,9 +15,11 @@ import { blogListActions } from '@/store/blogSlice'
 import useLogIn from '@/hooks/useLogIn'
 
 
-
-export default function BlogCard(blogData:IBlog) {
-    const {category,createdAt,likeCount,post_comment,isLiked,image,author,slug,title,text} = blogData
+export interface IBlogCard extends IBlog{
+    showLikes:boolean
+}
+export default function BlogCard(blogData:IBlogCard) {
+    const {category,createdAt,likeCount,post_comment,isLiked,image,author,slug,title,text,showLikes} = blogData
     const date = new DateFormatter()
     const dispatch = useAppDispatch()
     const {isAuthenticated} = useAppSelector((state=>state.user))
@@ -45,7 +47,7 @@ export default function BlogCard(blogData:IBlog) {
                     <div className="rounded-xl px-2 py-[2px] opacity-80 text-white text-xs border-white border">
                         {category.name}
                     </div>
-                    <div className='flex-center'>
+                    {showLikes && <div className='flex-center'>
                         <button  disabled={isLoading} className='flex-center text-main mr-1'>
                             <Icons.comment className = "text-[22px] text-main"/>
                             <span className='text-xs ml-[2px]'>{post_comment.length}</span>
@@ -54,7 +56,7 @@ export default function BlogCard(blogData:IBlog) {
                         {isLiked?<Icons.heart className = "text-2xl text-main"/>:<Icons.lineHeart className = "text-2xl text-main"/>}
                             <span className='text-xs'>{likeCount}</span>
                         </button>
-                    </div>
+                    </div>}
                 </div>                
             </div>
         </div>

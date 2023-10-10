@@ -20,7 +20,9 @@ export const blogListSlice = createSlice({
     name:"bloglist",
     initialState:initalState,
     reducers:{
+        //blogs in view are the paginatd blogs the user sees
         setBlogsInView(state,action:PayloadAction<number>){
+            //gets  the start and end array of blog based on userpage and page size, this is used to calculate the start and end of the slice
             const [ start,end]  = [(action.payload-1)*pageSize, ((action.payload-1)*pageSize)+pageSize]
             const newArray = blogSlicedArray(state.blogs,start,end)
             state.blogsInView = newArray
@@ -34,6 +36,7 @@ export const blogListSlice = createSlice({
             const blogsInView = blogSlicedArray(action.payload,0,pageSize)
             state.blogsInView = blogsInView
         },
+        //updates a single blog from the list of blogs to update the ui
         updateSingleBlog(state,action:PayloadAction<IBlog>){
             const newBlog:IBlog[] = [] 
             state.blogs.map((item)=>{

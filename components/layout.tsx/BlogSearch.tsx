@@ -13,13 +13,11 @@ export default function BlogSearch() {
     const res:AxiosResponse<IBlog[]>|undefined = data
     const blogs = res?.data
     
-
+    //makes a post reqest on keystroke change
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
-        const target = e.target as any
-        setText(target.value)
-        console.log("mutating")
-        mutate({keyword:target.value})
-        
+        setText(e.target.value)
+        e.target
+        mutate({keyword:e.target.value}) 
     }
   
     return (
@@ -38,7 +36,8 @@ export default function BlogSearch() {
         </div>
             
         </div>}
-
+        
+        {/* maps result of search */}
         {blogs && <div className='mt-3'>
             {blogs.map((item,key)=>(
                 <Link href={`/blog/${item.slug}`} key={key}>

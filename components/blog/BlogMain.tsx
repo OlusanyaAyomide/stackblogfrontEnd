@@ -119,7 +119,7 @@ export default function BlogMain() {
             <h1 className="mb-5 font-medium sm:text-center md:text-left md:ml-3">Related posts</h1>
             <div className='flex flex-wrap  justify-between'>
              {related?.map((item,key)=>(
-                <BlogCard {...item} key={key}/>
+                <BlogCard showLikes={false} {...item} key={key}/>
             ))}
             </div>
         </div>
