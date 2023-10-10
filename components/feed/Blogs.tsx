@@ -21,9 +21,7 @@ export default function Blogs() {
     const {isLoading} = useGetRequest({queryKey:['all-blog'],queryFn,
     onSuccess:({data}:AxiosResponse<IBlogResponse>)=>{
         dispatch(blogListActions.setAllBlog(data.blog))
-        // if(data.profile){
-        //     dispatch(userActions.setUserProfile(data.profile))
-        // }
+
     }
     })
     return (

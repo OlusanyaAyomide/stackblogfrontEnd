@@ -17,6 +17,7 @@ export default function GoogleAuth() {
   const dispatch = useAppDispatch()
   const {loading,signIn} = useLogIn()
   const  {isLoading} = useGetRequest({queryKey:["user-profile"],queryFn,
+  //sets user profile on succesful request
     onSuccess:({data}:AxiosResponse<IUser>)=>{
         dispatch(userActions.setUserProfile(data))
     }})

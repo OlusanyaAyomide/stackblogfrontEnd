@@ -28,7 +28,10 @@ export default function BlogMain() {
     const {profile} =useAppSelector((state=>state.user))
     const  date = new DateFormatter()
     const [isLiked,setIsLiked] = useState(false)
+
+    //keeps track of post likes
     const [likeCount,setLikeCount] = useState<number>(0)
+    //triggered if 404 is sent from server
     const [notfound,setNotFound] = useState(false)
 
 
@@ -90,7 +93,9 @@ export default function BlogMain() {
                 <Icons.chat className ="text-lg text-main"/>
                 <span className='text-xs'>{blog.post_comment.length}</span>
             </button>
+            
             <button onClick={()=>{
+                //update like count before sending to backend
                 mutate({slug:blog.slug})
                 setIsLiked((prev=>!prev))
                 setLikeCount((prev=>isLiked?prev-1:prev+1))
@@ -120,7 +125,10 @@ export default function BlogMain() {
         </div>
     </div>
     </>}    
-    {isLoading && <BlogSkeleton/>}   
+    {/* Custom skeleton loader when blog post is loading */}
+    {isLoading && <BlogSkeleton/>}  
+
+    {/* is set is 404 is returned  */}
     {notfound && <NotFound/>}   
     </>
 

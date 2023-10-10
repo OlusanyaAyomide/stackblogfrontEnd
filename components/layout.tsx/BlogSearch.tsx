@@ -24,7 +24,6 @@ export default function BlogSearch() {
   
     return (
     <div>
-        {/* <input type="text" onChange={(e)=>e.target.value} /> */}
         <Input value={text} autoFocus onChange={handleChange} 
         className=' w-full md:w-[350px] lg:w-full' placeholder='Search blogs'/>
         {(!text || blogs?.length === 0) && <div className='mt-3 relative w-full h-[200px] flex items-center'>

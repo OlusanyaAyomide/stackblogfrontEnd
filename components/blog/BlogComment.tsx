@@ -6,13 +6,15 @@ import { usePostRequest } from '@/hooks/useRequestProcessor'
 import { useAppSelector } from '@/hooks/reduxHooks'
 import { blogCommentRequest as mutationFn } from '@/hooks/requests/endpoints'
 
-
+//displays all comments under a post
 export default function BlogComment({comment,slug}:{comment:IComment[],slug:string}) {
+    //blog comments are set as initial state
     const [comments,setComments] = useState<IComment[]>(comment)
     const {profile} = useAppSelector((state=>state.user))
     const {mutate} = usePostRequest({mutationFn,sucessText:'comment has been added'})
     const currentTime = new Date()
 
+    //blogs are first added to state before being sent to server(optismistic update)
     const handleSubmit = (text:string)=>{
         setComments((prev=>{return[{
             comment:text,
