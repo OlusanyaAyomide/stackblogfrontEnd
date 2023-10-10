@@ -13,10 +13,9 @@ export default function BlogSearch() {
     const res:AxiosResponse<IBlog[]>|undefined = data
     const blogs = res?.data
     
-    //makes a post reqest on keystroke change
+    //makes a post request on input value change
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
         setText(e.target.value)
-        e.target
         mutate({keyword:e.target.value}) 
     }
   

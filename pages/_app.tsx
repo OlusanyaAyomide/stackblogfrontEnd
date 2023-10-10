@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <QueryClientProvider client={queryClient}>
               <Component {...pageProps}/>
               <Toaster/>
-              <TailwindIndicator/>
+              {/* <TailwindIndicator/> */}
               <ReactQueryDevtools initialIsOpen={false} />
           </QueryClientProvider>
         </GoogleOAuthProvider>
